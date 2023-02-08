@@ -1,0 +1,44 @@
+---
+title: "Regex"
+output: html_document
+date: "`r Sys.Date()`"
+---
+Uploading required package:
+```{r}
+library(dplyr)
+MData <- read.csv("measurements.csv")
+```
+
+Inspecting the dataframe:
+```{r}
+tail(MData)
+```
+```{r}
+head(MData)
+```
+```{r}
+summary(MData)
+```
+```{r}
+str(MData)
+```
+```{r}
+dim(MData)
+```
+
+Using regular expressions and dplyr to change genus name:
+NOTE: In assignment 1, my column was titled "species" rather than "Organism," so that's what we're working with here
+```{r}
+MData <- MData %>%
+  mutate(Sp = gsub("(\\w)\\w+(.*)","\\1\\.\\2", measurements$species)) %>% #regular expression to change genus name to first letter
+  select(Sp, everything()) %>% #Moving Sp column to beginning of dataframe
+  select(-c(species)) #Dropping the species column 
+head(MData)
+```
+```{r}
+tail(MData)
+```
+
+```{r}
+write.csv(MData, "MeasShort.csv", row.names=FALSE)
+```
