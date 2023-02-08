@@ -10,6 +10,7 @@ MData <- read.csv("measurements.csv")
 ```
 
 Inspecting the dataframe:
+NOTE: Because the CSV was created using the "dataGenerato" code chunk, this dataframe doesn't include the Volume column generated from "volumeEstimato." However, it does not matter for this assignment so leaving it as is.
 ```{r}
 tail(MData)
 ```
